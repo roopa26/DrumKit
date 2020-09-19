@@ -1,23 +1,18 @@
-var numberOfDrumButtons = document.querySelectorAll(".drum").length;
+var randomNumber1 = Math.floor(Math.random()*6)+1;
+var randomNumber2 = Math.floor(Math.random()*6)+1;
+var imgSrc1 = "images/dice"+randomNumber1+".png";
+var imgSrc2 = "images/dice"+randomNumber2+".png";
 
-for(var i =0;i<numberOfDrumButtons;i++){
-  document.querySelectorAll(".drum")[i].addEventListener("click",btnClickEventListener)
+document.querySelector(".img1").setAttribute("src",imgSrc1);
+document.querySelector(".img2").setAttribute("src",imgSrc2);
+
+if(randomNumber1>randomNumber2){
+  document.querySelector(".container h1").textContent = "Player 1 wins!";
 }
-function btnClickEventListener(event){
-  var classAttribute = this.getAttribute('class')[0];
-  var soundTrack = "sounds/";
-  switch(classAttribute){
-    case "w": soundTrack+="crash.mp3";break;
-    case "a": soundTrack+="kick-bass.mp3";break;
-    case "s": soundTrack+="snare.mp3";break;
-    case "d": soundTrack+="tom-1.mp3";break;
-    case "j": soundTrack+="tom-2.mp3";break;
-    case "k": soundTrack+="tom-3.mp3";break;
-    case "l": soundTrack+="tom-4.mp3";break;
-    default : break;
-  }
-  var audio = new Audio(soundTrack);
-  audio.play();
+else if(randomNumber1<randomNumber2){
+  document.querySelector(".container h1").textContent = "Player 2 wins!";
 }
-//var audio = new Audio("sounds/tom-1.mp3");
-//audio.play();
+else
+{
+  document.querySelector(".container h1").textContent = "draw";
+}
