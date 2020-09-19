@@ -1,28 +1,14 @@
 var numberOfDrumButtons = document.querySelectorAll(".drum").length;
 
 for(var i =0;i<numberOfDrumButtons;i++){
-  document.querySelectorAll(".drum")[i].addEventListener("click",btnClickEventListener)
+  document.querySelectorAll(".drum")[i].addEventListener("click",function(){
+    var btnInnerHtml = this.innerHTML;
+    makeSound(btnInnerHtml);
+  })
 }
-function btnClickEventListener(event){
-  var classAttribute = this.getAttribute('class')[0];
-  var soundTrack = "sounds/";
-  switch(classAttribute){
-    case "w": soundTrack+="crash.mp3";break;
-    case "a": soundTrack+="kick-bass.mp3";break;
-    case "s": soundTrack+="snare.mp3";break;
-    case "d": soundTrack+="tom-1.mp3";break;
-    case "j": soundTrack+="tom-2.mp3";break;
-    case "k": soundTrack+="tom-3.mp3";break;
-    case "l": soundTrack+="tom-4.mp3";break;
-    default : console.log("invalid key"); break;
-  }
-  var audio = new Audio(soundTrack);
-  audio.play();
-}
-document.addEventListener("keypress",function(event){
-  var classAttribute = event.key;
-  var soundTrack = "sounds/";
-  switch(classAttribute){
+function makeSound(key){
+
+  switch(key){
     case "w": var audio = new Audio("sounds/crash.mp3");
     audio.play();
     break;
@@ -47,6 +33,9 @@ document.addEventListener("keypress",function(event){
     default : console.log("invalid key");
     break;
   }
-})
-//var audio = new Audio("sounds/tom-1.mp3");
-//audio.play();
+}
+
+document.addEventListener("keypress",function(event){
+  var keyPressed = event.key;
+  makeSound(keyPressed)
+});
